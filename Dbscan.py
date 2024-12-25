@@ -5,6 +5,7 @@ from sklearn.neighbors import NearestNeighbors
 EPSILON = 50
 MIN_POINTS = 3
 
+#Инициализация
 pygame.init()
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -14,8 +15,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (128, 128, 128)
 COLORS = [
-    (255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0)
-    (255, 255, 0)]
+    (255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0)]
 
 points = []
 flags = []
@@ -25,6 +25,7 @@ def draw_points():
     for point, flag in zip(points, flags):
         pygame.draw.circle(screen, flag, point, 3)
 
+#Кнопка "RESET"
 def draw_reset_button():
     font = pygame.font.Font(None, 36)
     text = font.render("RESET", True, BLACK)
