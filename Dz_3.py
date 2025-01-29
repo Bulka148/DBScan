@@ -5,15 +5,16 @@ import numpy as np
 
 # Генерация случайных координат городов с учетом минимального расстояния
 def generate_random_coordinates(num_cities, min_distance):
-    coordinates = []
 
-    while len(coordinates) < num_cities:
+    coordinates_ = []
+
+    while len(coordinates_) < num_cities:
         x, y = random.uniform(0, 100), random.uniform(0, 100)
         # Проверка, что новое место подходит
-        if all(np.sqrt((x - cx) ** 2 + (y - cy) ** 2) >= min_distance for cx, cy in coordinates):
-            coordinates.append((x, y))
+        if all(np.sqrt((x - cx) ** 2 + (y - cy) ** 2) >= min_distance for cx, cy in coordinates_):
+            coordinates_.append((x, y))
 
-    return coordinates
+    return coordinates_
 
 
 # Расчет евклидова расстояния между двумя точками
@@ -22,8 +23,9 @@ def calculate_distance(point1, point2):
 
 
 # Создание матрицы расстояний между всеми городами
-def create_distance_matrix(coordinates):
-    return [[calculate_distance(p1, p2) for p2 in coordinates] for p1 in coordinates]
+def create_distance_matrix(coordinates__):
+    return [[calculate_distance(p1, p2) for p2 in coordinates__] for p1 in coordinates__]
+
 
 # Инициализация координат городов и матрицы расстояний
 coordinates = generate_random_coordinates(6, 10)
