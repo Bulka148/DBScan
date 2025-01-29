@@ -2,6 +2,7 @@ import random
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 # Генерация случайных координат городов с учетом минимального расстояния
 def generate_random_coordinates(num_cities, min_distance):
     coordinates = []
@@ -14,9 +15,11 @@ def generate_random_coordinates(num_cities, min_distance):
 
     return coordinates
 
+
 # Расчет евклидова расстояния между двумя точками
 def calculate_distance(point1, point2):
     return np.sqrt((point1[0] - point2[0]) ** 2 + (point1[1] - point2[1]) ** 2)
+
 
 # Создание матрицы расстояний между всеми городами
 def create_distance_matrix(coordinates):
@@ -29,6 +32,7 @@ distance_matrix = create_distance_matrix(coordinates)
 # Переменная для хранения лучшего найденного пути
 best_solution = None
 
+
 # Алгоритм решения задачи коммивояжера с использованием генетического алгоритма
 def solve_tsp_with_genetic_algorithm(population_size, number_of_parents, generations):
     global best_solution
@@ -39,10 +43,11 @@ def solve_tsp_with_genetic_algorithm(population_size, number_of_parents, generat
         random.shuffle(path)
         return path
 
-    # Расчет длины пути на основе матрицы расстояний (с возвращением в начальный город)
+    # Расчет длины пути на основе матрицы расстояний
     def calculate_path_length(path):
         distances = [distance_matrix[path[i - 1]][path[i]] for i in range(1, len(path))]
-        distances.append(distance_matrix[path[-1]][path[0]])  # Возвращение в начальный город
+        # Возвращение в начальный город
+        distances.append(distance_matrix[path[-1]][path[0]])
         return sum(distances)
 
     # Инициализация начального поколения
@@ -82,6 +87,7 @@ def solve_tsp_with_genetic_algorithm(population_size, number_of_parents, generat
     best_path = sorted(population, key=calculate_path_length)[0]
     best_solution = (float(calculate_path_length(best_path)), best_path)
 
+
 # Визуализация маршрута решения
 def visualize_solution(coordinates, best_path, best_path_length):
     plt.figure(figsize=(8, 6))
@@ -112,6 +118,7 @@ def visualize_solution(coordinates, best_path, best_path_length):
     plt.ylim(0, 120)
     plt.grid(True)
     plt.show()
+
 
 # Запуск генетического алгоритма
 solve_tsp_with_genetic_algorithm(1000, 100, 10)
